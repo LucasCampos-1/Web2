@@ -2,13 +2,25 @@
 
 @section('content')
 <div class="container">
+
     <h1 class="my-4">Detalhes do Livro</h1>
 
     <div class="card mb-4">
+        <div class="mb-3 text-center">
+            <img
+            src="{{ $book->cover_image
+                ? asset('storage/' . $book->cover_image)
+                : asset('images/default-cover.png') }}"
+            alt="Capa do Livro"
+            width="200"
+            class="img-fluid rounded shadow">
+        </div>
+
         <div class="card-header">
             <strong>Título:</strong> {{ $book->title }}
         </div>
         <div class="card-body">
+            
             <p><strong>Autor:</strong>
                 <a href="{{ route('authors.show', $book->author->id) }}">
                     {{ $book->author->name }}

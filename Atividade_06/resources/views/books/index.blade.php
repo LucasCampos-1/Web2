@@ -2,6 +2,7 @@
 
 @section('content')
 <div class="container">
+
     <h1 class="my-4">Lista de Livros</h1>
 
     @if(session('success'))
@@ -21,6 +22,7 @@
         <thead>
             <tr>
                 <th>ID</th>
+                <th>Capa</th>
                 <th>Título</th>
                 <th>Autor</th>
                 <th>Ações</th>
@@ -30,6 +32,14 @@
             @forelse($books as $book)
                 <tr>
                     <td>{{ $book->id }}</td>
+                    <td>
+                        <img
+                            src="{{ $book->cover_image
+                                ? asset('storage/' . $book->cover_image)
+                                : asset('images/default-cover.png') }}"
+                            alt="Capa do Livro"
+                            width="80">
+                    </td>
                     <td>{{ $book->title }}</td>
                     <td>{{ $book->author->name }}</td>
                     <td>

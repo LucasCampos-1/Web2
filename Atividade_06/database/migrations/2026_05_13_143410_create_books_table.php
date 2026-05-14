@@ -13,6 +13,7 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->integer('pages');
+            $table->string('cover_image')->nullable();
             $table->foreignId('author_id')->constrained()->onDelete('cascade');
             $table->foreignId('category_id')->constrained()->onDelete('cascade');
             $table->foreignId('publisher_id')->constrained()->onDelete('cascade');
