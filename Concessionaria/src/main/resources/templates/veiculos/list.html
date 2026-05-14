@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Veículos</title>
+</head>
+<body>
+    <h1>Veículos</h1>
+
+    <a href th:href="@{/veiculos/novo}">Adicionar Veículo</a>
+
+    <table border="1">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Marca</th>
+                <th>Modelo</th>
+                <th>Ano</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="veiculo : ${veiculos}">
+                <td th:text="${veiculo.id}"></td>
+                <td th:text="${veiculo.marca.nome}"></td>
+                <td th:text="${veiculo.modelo}"></td>
+                <td th:text="${veiculo.ano}"></td>
+                <td>
+                    <a th:href="@{/veiculos/editar/{id}(id=${veiculo.id})}">Editar</a>
+                    <a th:href="@{/veiculos/deletar/{id}(id=${veiculo.id})}">Deletar</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>
