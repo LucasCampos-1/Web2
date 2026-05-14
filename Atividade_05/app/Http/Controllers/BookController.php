@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Book;
+use App\Models\User;
 use App\Models\Publisher;
 use App\Models\Author;
 use App\Models\Category;
@@ -32,8 +33,9 @@ class BookController extends Controller
     {
         $book->load(['author', 'publisher', 'category']);
 
-        return view('books.show', compact('book'));
+        $users = User::all();
 
+        return view('books.show', compact('book', 'users'));
     }
 
     public function edit(Book $book)
