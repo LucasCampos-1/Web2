@@ -56,7 +56,7 @@ mvn -version
 
 **1. Clone o repositório**
 ```bash
-git clone https://github.com/LucasCampos-1/Web2.git/
+git clone https://github.com/LucasCampos-1/Web2/tree/main/Concessionaria
 cd Web2/Concessionaria
 ```
 
