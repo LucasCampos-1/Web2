@@ -1,0 +1,9 @@
+com\example\crud\service\VeiculoService.class
+com\example\crud\repository\MarcaRepository.class
+com\example\crud\model\Veiculo.class
+com\example\crud\service\MarcaService.class
+com\example\crud\Application.class
+com\example\crud\controller\MarcaController.class
+com\example\crud\model\Marca.class
+com\example\crud\repository\VeiculoRepository.class
+com\example\crud\controller\VeiculoController.class

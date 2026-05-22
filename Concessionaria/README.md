@@ -67,8 +67,7 @@ mvn spring-boot:run
 
 **3. Acesse no navegador**
 ```
-http://localhost:8080/marcas
-http://localhost:8080/veiculos
+http://localhost:8080
 ```
 
 > O banco de dados H2 é criado automaticamente em memória — não precisa instalar nada!
@@ -81,6 +80,7 @@ http://localhost:8080/veiculos
 src/main/
 ├── java/com/example/crud/
 │   ├── controller/
+│   │   ├── IndexController.java
 │   │   ├── MarcaController.java
 │   │   └── VeiculoController.java
 │   ├── model/
@@ -96,11 +96,10 @@ src/main/
 └── resources/
     ├── templates/
     │   ├── marcas/
-    │   │   ├── list.html
-    │   │   └── form.html
-    │   └── veiculos/
-    │       ├── list.html
-    │       └── form.html
+    │   │   └── list.html
+    │   ├── veiculos/
+    │   │   └── list.html
+    │   └── index.html
     └── application.properties
 ```
 

@@ -37,7 +37,7 @@ public class VeiculoController {
         Marca marca = marcaRepository.findById(marcaId).orElseThrow();
         veiculo.setMarca(marca);
         veiculoRepository.save(veiculo);
-        return "redirect:/veiculos";
+        return "redirect:/";
     }
 
     @GetMapping("/editar/{id}")
@@ -50,6 +50,6 @@ public class VeiculoController {
     @GetMapping("/deletar/{id}")
     public String deletarVeiculo(@PathVariable Long id) {
         veiculoRepository.deleteById(id);
-        return "redirect:/veiculos";
+        return "redirect:/";
     }
 }

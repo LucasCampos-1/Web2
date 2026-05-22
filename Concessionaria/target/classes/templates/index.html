@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Concessionária</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-zinc-950 text-zinc-100 min-h-screen font-sans">
+
+    <!-- HEADER -->
+    <header class="border-b border-zinc-800 px-10 py-4 flex items-center justify-between sticky top-0 bg-zinc-950 z-10">
+        <h1 class="text-2xl font-black tracking-widest uppercase">Auto<span class="text-red-500">CRUD</span></h1>
+        <span class="text-zinc-500 text-xs tracking-widest uppercase">Sistema de Gestão</span>
+    </header>
+
+    <!-- HERO -->
+    <div class="px-10 py-12 border-b border-zinc-800">
+        <h2 class="text-6xl font-black uppercase tracking-tight leading-none">
+            Gestão de <span class="text-red-500">Frota</span>
+        </h2>
+        <p class="text-zinc-500 text-sm mt-3">Cadastre marcas e veículos da sua concessionária.</p>
+    </div>
+
+    <!-- MAIN -->
+    <main class="px-10 py-10 grid grid-cols-1 lg:grid-cols-2 gap-8">
+
+        <!-- VEÍCULOS -->
+        <section class="bg-zinc-900 rounded-xl p-6 border border-zinc-800">
+            <div class="flex items-center justify-between mb-6">
+                <h3 class="text-2xl font-black uppercase tracking-wide">Veículos</h3>
+                <a th:href="@{/veiculos/novo}"
+                   class="bg-red-600 hover:bg-red-500 text-white text-xs font-semibold uppercase tracking-widest px-4 py-2 rounded transition">
+                    + Adicionar
+                </a>
+            </div>
+
+            <table class="w-full text-sm">
+                <thead>
+                    <tr class="text-zinc-500 text-xs uppercase tracking-widest border-b border-zinc-800">
+                        <th class="text-left pb-3 font-medium">ID</th>
+                        <th class="text-left pb-3 font-medium">Marca</th>
+                        <th class="text-left pb-3 font-medium">Modelo</th>
+                        <th class="text-left pb-3 font-medium">Ano</th>
+                        <th class="text-left pb-3 font-medium">Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:if="${#lists.isEmpty(veiculos)}">
+                        <td colspan="5" class="py-8 text-center text-zinc-600 text-xs tracking-widest uppercase">Nenhum veículo cadastrado</td>
+                    </tr>
+                    <tr th:each="veiculo : ${veiculos}"
+                        class="border-b border-zinc-800 hover:bg-zinc-800 transition">
+                        <td class="py-3 pr-4 text-zinc-500" th:text="${veiculo.id}"></td>
+                        <td class="py-3 pr-4 font-medium" th:text="${veiculo.marca.nome}"></td>
+                        <td class="py-3 pr-4" th:text="${veiculo.modelo}"></td>
+                        <td class="py-3 pr-4 text-zinc-400" th:text="${veiculo.ano}"></td>
+                        <td class="py-3 flex gap-3">
+                            <a th:href="@{/veiculos/editar/{id}(id=${veiculo.id})}"
+                               class="text-zinc-400 hover:text-white text-xs uppercase tracking-wide transition">Editar</a>
+                            <a th:href="@{/veiculos/deletar/{id}(id=${veiculo.id})}"
+                               class="text-red-500 hover:text-red-400 text-xs uppercase tracking-wide transition">Deletar</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- MARCAS -->
+        <section class="bg-zinc-900 rounded-xl p-6 border border-zinc-800">
+            <div class="flex items-center justify-between mb-6">
+                <h3 class="text-2xl font-black uppercase tracking-wide">Marcas</h3>
+                <a th:href="@{/marcas/nova}"
+                   class="bg-red-600 hover:bg-red-500 text-white text-xs font-semibold uppercase tracking-widest px-4 py-2 rounded transition">
+                    + Adicionar
+                </a>
+            </div>
+
+            <table class="w-full text-sm">
+                <thead>
+                    <tr class="text-zinc-500 text-xs uppercase tracking-widest border-b border-zinc-800">
+                        <th class="text-left pb-3 font-medium">ID</th>
+                        <th class="text-left pb-3 font-medium">Nome</th>
+                        <th class="text-left pb-3 font-medium">País</th>
+                        <th class="text-left pb-3 font-medium">Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:if="${#lists.isEmpty(marcas)}">
+                        <td colspan="4" class="py-8 text-center text-zinc-600 text-xs tracking-widest uppercase">Nenhuma marca cadastrada</td>
+                    </tr>
+                    <tr th:each="marca : ${marcas}"
+                        class="border-b border-zinc-800 hover:bg-zinc-800 transition">
+                        <td class="py-3 pr-4 text-zinc-500" th:text="${marca.id}"></td>
+                        <td class="py-3 pr-4 font-medium" th:text="${marca.nome}"></td>
+                        <td class="py-3 pr-4 text-zinc-400" th:text="${marca.paisOrigem}"></td>
+                        <td class="py-3 flex gap-3">
+                            <a th:href="@{/marcas/editar/{id}(id=${marca.id})}"
+                               class="text-zinc-400 hover:text-white text-xs uppercase tracking-wide transition">Editar</a>
+                            <a th:href="@{/marcas/deletar/{id}(id=${marca.id})}"
+                               class="text-red-500 hover:text-red-400 text-xs uppercase tracking-wide transition">Deletar</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="px-10 py-4 border-t border-zinc-800 text-zinc-600 text-xs tracking-widest uppercase">
+        Concessionária © 2026 — Lucas Guilherme Ferreira Campos
+    </footer>
+
+</body>
+</html>

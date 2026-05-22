@@ -30,7 +30,7 @@ public class MarcaController {
     @PostMapping("/salvar")
     public String salvar(@ModelAttribute Marca marca) {
         marcaRepository.save(marca);
-        return "redirect:/marcas";
+        return "redirect:/";
     }
 
     @GetMapping("/editar/{id}")
@@ -42,6 +42,6 @@ public class MarcaController {
     @GetMapping("/deletar/{id}")
     public String deletar(@PathVariable long id) {
         marcaRepository.deleteById(id);
-        return "redirect:/marcas";
+        return "redirect:/";
     }
 }
