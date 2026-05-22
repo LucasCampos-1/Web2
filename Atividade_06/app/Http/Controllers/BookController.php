@@ -107,7 +107,7 @@ class BookController extends Controller
             'publisher_id' => 'required|exists:publishers,id',
             'author_id' => 'required|exists:authors,id',
             'category_id' => 'required|exists:categories,id',
-
+            'pages' => 'required|integer',
             'cover_image' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
         ]);
 
@@ -118,7 +118,7 @@ class BookController extends Controller
 
             $validated['cover_image'] = $path;
         }
-
+        
         Book::create($validated);
 
         return redirect()
@@ -146,7 +146,7 @@ class BookController extends Controller
             'publisher_id' => 'required|exists:publishers,id',
             'author_id' => 'required|exists:authors,id',
             'category_id' => 'required|exists:categories,id',
-
+            'pages' => 'required|integer',
             'cover_image' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
         ]);
 
