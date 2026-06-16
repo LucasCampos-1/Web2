@@ -27,6 +27,7 @@
                 type="email"
                 name="email"
                 class="form-control"
+                value="{{ $author->email }}"
                 required
             >
         </div>
@@ -38,6 +39,7 @@
                 type="date"
                 name="birth_date"
                 class="form-control"
+                value="{{ $author->birth_date }}"
                 required
             >
         </div> 

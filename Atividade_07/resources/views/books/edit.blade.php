@@ -109,6 +109,16 @@
             @enderror
         </div>
 
+        <div class="mb-3 text-center">
+            <img
+            src="{{ $book->cover_image
+                ? asset('storage/' . $book->cover_image)
+                : asset('images/default-cover.png') }}"
+            alt="Capa do Livro"
+            width="200"
+            class="img-fluid rounded shadow">
+        </div>
+
         <div class="mb-3">
             <label for="cover_image" class="form-label">
                 Capa do Livro
