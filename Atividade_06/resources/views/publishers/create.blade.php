@@ -18,6 +18,16 @@
             >
         </div>
 
+        <div class="mb-3">
+            <label class="form-label">Endereço</label>
+            <input
+                type="text"
+                name="address"
+                class="form-control"
+                required
+            >
+        </div>
+
         <button type="submit" class="btn btn-success">
             Salvar
         </button>

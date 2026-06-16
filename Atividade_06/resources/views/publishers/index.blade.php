@@ -19,6 +19,7 @@
             <tr>
                 <th>#</th>
                 <th>Nome</th>
+                <th>Endereço</th>
                 <th>Ações</th>
             </tr>
         </thead>
@@ -28,6 +29,7 @@
                 <tr>
                     <td>{{ $loop->iteration }}</td>
                     <td>{{ $publisher->name }}</td>
+                    <td>{{ $publisher->address }}</td>
 
                     <td>
                         <a href="{{ route('publishers.show', $publisher) }}" class="btn btn-info btn-sm">

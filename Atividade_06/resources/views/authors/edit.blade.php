@@ -20,6 +20,28 @@
             >
         </div>
 
+        <div class="mb-3">
+            <label class="form-label">E-mail</label>
+
+            <input
+                type="email"
+                name="email"
+                class="form-control"
+                required
+            >
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Data de Nascimento</label>
+
+            <input
+                type="date"
+                name="birth_date"
+                class="form-control"
+                required
+            >
+        </div> 
+
         <button type="submit" class="btn btn-success">
             Atualizar
         </button>

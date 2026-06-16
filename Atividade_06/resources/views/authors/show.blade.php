@@ -12,6 +12,8 @@
         <div class="card-body">
             <p><strong>ID:</strong> {{ $author->id }}</p>
             <p><strong>Nome:</strong> {{ $author->name }}</p>
+            <p><strong>E-mail:</strong> {{ $author->email }}</p>
+            <p><strong>Data de Nascimento:</strong> {{ $author->birth_date }}</p>
         </div>
     </div>
 

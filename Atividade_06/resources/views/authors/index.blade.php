@@ -19,6 +19,8 @@
             <tr>
                 <th>#</th>
                 <th>Nome</th>
+                <th>E-mail</th>
+                <th>Data de Nascimento</th>
                 <th>Ações</th>
             </tr>
         </thead>
@@ -28,6 +30,8 @@
                 <tr>
                     <td>{{ $loop->iteration }}</td>
                     <td>{{ $author->name }}</td>
+                    <td>{{ $author->email }}</td>
+                    <td>{{ $author->birth_date }}</td>
 
                     <td>
                         <a href="{{ route('authors.show', $author) }}" class="btn btn-info btn-sm">
