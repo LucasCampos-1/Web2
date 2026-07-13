@@ -15,6 +15,7 @@ class DatabaseSeeder extends Seeder
     {
         FakerFactory::create()->unique(true);
         $this->call([
+            AdminUserSeeder::class,
             CategorySeeder::class,
             AuthorPublisherBookSeeder::class,
         ]);    
@@ -22,6 +23,7 @@ class DatabaseSeeder extends Seeder
         User::factory()->create([
             'name' => 'Test User',
             'email' => 'test@example.com',
+            'role' => 'cliente',
         ]);
 
         $this->call([

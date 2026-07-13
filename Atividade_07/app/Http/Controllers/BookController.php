@@ -21,6 +21,7 @@ class BookController extends Controller
 
     public function create()
     {
+        $this->authorize('create', Book::class);
         //
     }
 
@@ -87,6 +88,8 @@ class BookController extends Controller
         if ($book->cover_image) {
             Storage::disk('public')->delete($book->cover_image);
         }
+        
+        $this->authorize('delete', $book);
 
         $book->delete();
 

@@ -13,8 +13,27 @@ use Illuminate\Notifications\Notifiable;
 #[Fillable(['name', 'email', 'password'])]
 #[Hidden(['password', 'remember_token'])]
 class User extends Authenticatable
-{
+ {
     use HasFactory, Notifiable;
+
+        protected $fillable = [
+        'name', 'email', 'password', 'role',
+    ];
+
+    public function isAdmin(): bool
+    {
+        return $this->role === 'admin';
+    }
+
+    public function isBibliotecario(): bool
+    {
+        return $this->role === 'biblioteca';
+    }
+
+    public function isCliente(): bool
+    {
+        return $this->role === 'cliente';
+    }
 
     protected function casts()
     {
@@ -24,6 +43,7 @@ class User extends Authenticatable
         ];
     }
     
+
     public function books()
     {
         return $this->belongsToMany(Book::class, 'borrowings')

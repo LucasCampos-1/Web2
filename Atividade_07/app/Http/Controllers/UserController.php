@@ -30,12 +30,25 @@ class UserController extends Controller
 
     public function edit(\App\Models\User $user)
     {
+        $this->authorize('update', $user);
         return view('users.edit', compact('user'));
     }
 
     public function update(Request $request, \App\Models\User $user)
     {
-        $user->update($request->only('name', 'email'));
+       $this->authorize('update', $user);
+
+        $data = $request->validate([
+            'name'  => 'required|string',
+            'email' => 'required|email',
+            'role'  => 'sometimes|in:admin,bibliotecario,cliente',
+        ]);
+
+        if (isset($data['role']) && !auth()->user()->isAdmin()) {
+            unset($data['role']);
+        }
+
+        $user->update($data);
 
         return redirect()->route('users.index')->with('success', 'Usuário atualizado com sucesso.');
     }

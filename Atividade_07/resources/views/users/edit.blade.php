@@ -18,6 +18,17 @@
             <input type="email" class="form-control" id="email" name="email" value="{{ old('email', $user->email) }}" required>
         </div>
 
+        @can('changeRole', $user)
+            <div class="mb-3">
+                <label for="role" class="form-label">Função</label>
+                <select class="form-control" id="role" name="role">
+                    <option value="cliente" {{ old('role', $user->role) == 'cliente' ? 'selected' : '' }}>Cliente</option>
+                    <option value="bibliotecario" {{ old('role', $user->role) == 'bibliotecario' ? 'selected' : '' }}>Bibliotecário</option>
+                    <option value="admin" {{ old('role', $user->role) == 'admin' ? 'selected' : '' }}>Admin</option>
+                </select>
+            </div>
+        @endcan
+
         <button type="submit" class="btn btn-success">Salvar</button>
         <a href="{{ route('users.index') }}" class="btn btn-secondary">Cancelar</a>
     </form>

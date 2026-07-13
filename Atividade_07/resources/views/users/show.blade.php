@@ -10,8 +10,10 @@
         </div>
         <div class="card-body">
             <p><strong>Email:</strong> {{ $user->email }}</p>
+            <p><strong>Função:</strong> {{ $user->role }}</p>
         </div>
     </div>
+
 
     <!-- Histórico de Empréstimos -->
     <div class="card mt-4">

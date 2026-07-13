@@ -18,6 +18,11 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Gate::policy(Order::class, OrderPolicy::class);
+        Gate::policy(Book::class, BookPolicy::class);
+        Gate::policy(Publisher::class, PublisherPolicy::class);
+        Gate::policy(Category::class, CategoryPolicy::class);
+        Gate::policy(Author::class, AuthorPolicy::class);
+        Gate::policy(User::class, UserPolicy::class);
         Paginator::useBootstrap();
     }
 }

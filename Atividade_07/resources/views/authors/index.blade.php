@@ -4,9 +4,11 @@
 <div class="container">
     <h1 class="my-4">Lista de Autores</h1>
 
-    <a href="{{ route('authors.create') }}" class="btn btn-success mb-3">
-        Adicionar Autor
-    </a>
+    @can('create', App\Models\Author::class)
+        <a href="{{ route('authors.create') }}" class="btn btn-success mb-3">
+            Adicionar Autor
+        </a>
+    @endcan
 
     @if(session('success'))
         <div class="alert alert-success">
@@ -38,18 +40,22 @@
                             Visualizar
                         </a>
 
-                        <a href="{{ route('authors.edit', $author) }}" class="btn btn-primary btn-sm">
-                            Editar
-                        </a>
+                        @can('update', $author)
+                            <a href="{{ route('authors.edit', $author) }}" class="btn btn-primary btn-sm">
+                                Editar
+                            </a>
+                        @endcan
 
-                        <form action="{{ route('authors.destroy', $author) }}" method="POST" style="display:inline;">
-                            @csrf
-                            @method('DELETE')
+                        @can('delete', $author)
+                            <form action="{{ route('authors.destroy', $author) }}" method="POST" style="display:inline;">
+                                @csrf
+                                @method('DELETE')
 
-                            <button class="btn btn-danger btn-sm">
-                                Excluir
-                            </button>
-                        </form>
+                                <button class="btn btn-danger btn-sm">
+                                    Excluir
+                                </button>
+                            </form>
+                        @endcan
                     </td>
                 </tr>
             @empty

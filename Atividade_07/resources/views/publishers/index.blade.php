@@ -4,9 +4,11 @@
 <div class="container">
     <h1 class="my-4">Lista de Editoras</h1>
 
-    <a href="{{ route('publishers.create') }}" class="btn btn-success mb-3">
-        Adicionar Editora
-    </a>
+    @can('create', App\Models\Publisher::class)
+        <a href="{{ route('publishers.create') }}" class="btn btn-success mb-3">
+            Adicionar Editora
+        </a>
+    @endcan
 
     @if(session('success'))
         <div class="alert alert-success">
@@ -36,18 +38,22 @@
                             Visualizar
                         </a>
 
-                        <a href="{{ route('publishers.edit', $publisher) }}" class="btn btn-primary btn-sm">
-                            Editar
-                        </a>
+                        @can('update', $publisher)
+                            <a href="{{ route('publishers.edit', $publisher) }}" class="btn btn-primary btn-sm">
+                                Editar
+                            </a>
+                        @endcan
 
-                        <form action="{{ route('publishers.destroy', $publisher) }}" method="POST" style="display:inline;">
-                            @csrf
-                            @method('DELETE')
+                        @can('delete', $publisher)
+                            <form action="{{ route('publishers.destroy', $publisher) }}" method="POST" style="display:inline;">
+                                @csrf
+                                @method('DELETE')
 
-                            <button class="btn btn-danger btn-sm">
-                                Excluir
-                            </button>
-                        </form>
+                                <button class="btn btn-danger btn-sm">
+                                    Excluir
+                                </button>
+                            </form>
+                        @endcan
                     </td>
                 </tr>
             @empty
