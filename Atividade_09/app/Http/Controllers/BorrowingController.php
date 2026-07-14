@@ -9,6 +9,8 @@ use App\Models\Borrowing;
 
 class BorrowingController extends Controller
 {
+    private const BORROWING_LIMIT = 5;
+
     public function store(Request $request, Book $book)
     {
         $request->validate([
@@ -17,15 +19,14 @@ class BorrowingController extends Controller
 
         $this->authorize('manageBorrowing', Book::class);
 
-        // Verifica se já existe um empréstimo em aberto (returned_at nulo) para esse livro
-        $hasOpenBorrowing = Borrowing::where('book_id', $book->id)
+        $userOpenBorrowingsCount = Borrowing::where('user_id', $request->user_id)
             ->whereNull('returned_at')
-            ->exists();
+            ->count();
 
-        if ($hasOpenBorrowing) {
+        if ($userOpenBorrowingsCount >= self::BORROWING_LIMIT) {
             return redirect()
                 ->route('books.show', $book)
-                ->with('error', 'Este livro já possui um empréstimo em aberto.');
+                ->with('error', 'Este usuário já atingiu o limite de ' . self::BORROWING_LIMIT . ' livros emprestados simultaneamente.');
         }
 
         Borrowing::create([
