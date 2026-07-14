@@ -17,7 +17,7 @@ class User extends Authenticatable
     use HasFactory, Notifiable;
 
         protected $fillable = [
-        'name', 'email', 'password', 'role',
+        'name', 'email', 'password', 'role', 'debit',
     ];
 
     public function isAdmin(): bool
@@ -40,9 +40,14 @@ class User extends Authenticatable
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
+            'debit' => 'decimal:2',
         ];
     }
-    
+
+    public function hasDebt(): bool
+    {
+        return $this->debit > 0;
+    }
 
     public function books()
     {

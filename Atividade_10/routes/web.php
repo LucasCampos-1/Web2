@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\AuthorController;
+use App\Http\Controllers\DebtController;
 use App\Http\Controllers\PublisherController;
 use App\Http\Controllers\BorrowingController;
 use App\Http\Controllers\UserController;
@@ -14,6 +15,11 @@ Route::get('/', function () {
 });
 
 Auth::routes();
+
+Route::middleware('auth')->group(function () {
+    Route::get('/debts', [DebtController::class, 'index'])->name('debts.index');
+    Route::patch('/debts/{user}/clear', [DebtController::class, 'clear'])->name('debts.clear');
+});
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/books/create-id-number', [BookController::class, 'createWithId'])->name('books.create.id');
