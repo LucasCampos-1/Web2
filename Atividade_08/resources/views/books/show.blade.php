@@ -1,8 +1,20 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
 
+<div class="container">
+    @if(session('error'))
+        <div class="alert alert-danger">
+            {{ session('error') }}
+        </div>
+    @endif
+    @if(session('success'))
+
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @endif
+    
     <h1 class="my-4">Detalhes do Livro</h1>
 
     <div class="card mb-4">

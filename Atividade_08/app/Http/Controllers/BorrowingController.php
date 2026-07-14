@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Book;
-use App\Models\Borrowing; 
+use App\Models\Borrowing;
 
 class BorrowingController extends Controller
 {
@@ -15,6 +15,19 @@ class BorrowingController extends Controller
             'user_id' => 'required|exists:users,id',
         ]);
 
+        $this->authorize('manageBorrowing', Book::class);
+
+        // Verifica se já existe um empréstimo em aberto (returned_at nulo) para esse livro
+        $hasOpenBorrowing = Borrowing::where('book_id', $book->id)
+            ->whereNull('returned_at')
+            ->exists();
+
+        if ($hasOpenBorrowing) {
+            return redirect()
+                ->route('books.show', $book)
+                ->with('error', 'Este livro já possui um empréstimo em aberto.');
+        }
+
         Borrowing::create([
             'user_id' => $request->user_id,
             'book_id' => $book->id,
@@ -23,9 +36,11 @@ class BorrowingController extends Controller
 
         return redirect()->route('books.show', $book)->with('success', 'Empréstimo registrado com sucesso.');
     }
-    
+
     public function returnBook(Borrowing $borrowing)
     {
+        $this->authorize('manageBorrowing', Book::class);
+
         $borrowing->update([
             'returned_at' => now(),
         ]);
@@ -36,7 +51,7 @@ class BorrowingController extends Controller
     public function userBorrowings(User $user)
     {
         $borrowings = $user->books()->withPivot('borrowed_at', 'returned_at')->get();
-    
+
         return view('users.borrowings', compact('user', 'borrowings'));
     }
 }
